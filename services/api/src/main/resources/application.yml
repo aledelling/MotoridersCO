@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: motoriders-api
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:postgres}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Supabase URL para validar tokens
+          issuer-uri: ${SUPABASE_AUTH_URL:https://xyz.supabase.co/auth/v1}
+          jwk-set-uri: ${SUPABASE_AUTH_URL:https://xyz.supabase.co/auth/v1}/.well-known/jwks.json
